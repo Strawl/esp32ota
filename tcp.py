@@ -21,7 +21,7 @@ print("connected")
 print("ESP32 online: ", ssid, "IP: ", wifi.ifconfig())
 
 
-TCP_RECEIVING_IP = input("On what Ip Address should the Server exist? ") or "127.0.0.1"
+TCP_RECEIVING_IP = wifi.ifconfig()[0] 
 TCP_RECEIVING_PORT = int(input("On what Port should the Server exist? "))
 
 BUFFER_SIZE = 1024
@@ -41,7 +41,6 @@ def attach_clients():
             print("awaiting clients")
             s.listen(1)
             conn, add = s.accept()
-            print(conn)
             print(add)
             conn.setblocking(0)
             connection_list.append([conn,add])
